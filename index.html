@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Bible Study & Puzzles – Faith Meets Fun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #e8700a; --orange-bright: #f5820d;
+      --yellow: #f7c948; --yellow-light: #fde98a;
+      --blue: #4a90d9; --blue-dark: #2d6db5;
+      --green: #5cb85c; --green-dark: #449944;
+      --purple: #3d2c6e;
+      --white: #ffffff; --off-white: #fef9f0; --light-bg: #f0f6ff;
+      --text-dark: #1a1025; --text-mid: #4a3f5c;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito Sans', sans-serif; background: var(--off-white); color: var(--text-dark); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 2.5rem;
+      background: rgba(255,255,255,0.93); backdrop-filter: blur(14px);
+      border-bottom: 2px solid var(--yellow);
+      box-shadow: 0 2px 16px rgba(232,112,10,0.1);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 900; color: var(--orange); text-decoration: none; }
+    .nav-logo .bl { color: var(--blue-dark); }
+    .nav-cta { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 800; color: white; text-decoration: none; background: var(--green); padding: 0.55rem 1.4rem; border-radius: 50px; box-shadow: 0 4px 0 var(--green-dark); transition: all 0.15s; }
+    .nav-cta:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--green-dark); }
+
+    .hero {
+      min-height: 100vh; background: linear-gradient(160deg, #f5820d 0%, #e8700a 45%, #c75c00 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 5rem; position: relative; overflow: hidden;
+    }
+    .sparkles {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .sp {
+      position: absolute; color: var(--yellow); font-size: 1.2rem; opacity: 0.5;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+    @keyframes twinkle { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:.7;transform:scale(1.3)} }
+
+    .hero-icon {
+      width: 110px; height: 110px; border-radius: 24px; background: white;
+      display: flex; align-items: center; justify-content: center; font-size: 3.2rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25), 0 0 0 4px rgba(255,255,255,0.3);
+      margin-bottom: 1.75rem; position: relative; z-index: 1;
+      opacity: 0; animation: popIn 0.6s 0.1s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    }
+    .hero-logo { font-family: 'Nunito', sans-serif; font-weight: 900; line-height: 1; margin-bottom: 1.25rem; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.7s 0.3s forwards; }
+    .hero-logo .l1 { display: block; font-size: clamp(3.5rem,10vw,7rem); color: var(--yellow); text-shadow: 0 4px 0 rgba(160,90,0,0.4); letter-spacing: -0.02em; }
+    .hero-logo .l2 { display: block; font-size: clamp(2.8rem,8vw,5.5rem); color: white; text-shadow: 0 4px 0 rgba(0,50,120,0.3); letter-spacing: -0.01em; }
+    .hero-logo .l3 { display: block; font-size: clamp(1.3rem,3.5vw,2.3rem); color: var(--yellow); letter-spacing: 0.06em; }
+
+    .hero-tag { font-size: clamp(0.95rem,2.2vw,1.2rem); font-weight: 600; color: rgba(255,255,255,0.92); max-width: 480px; line-height: 1.65; margin-bottom: 2rem; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+
+    .badges { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.25rem; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; }
+    .badge { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); color: white; font-size: 0.76rem; font-weight: 700; padding: 0.3rem 0.85rem; border-radius: 50px; letter-spacing: 0.04em; }
+
+    .store-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.7s 0.7s forwards; }
+    .sbtn { display: flex; align-items: center; gap: 0.7rem; padding: 0.9rem 1.6rem; border-radius: 14px; text-decoration: none; transition: all 0.18s; min-width: 190px; }
+    .sbtn-ios { background: var(--text-dark); color: white; box-shadow: 0 6px 0 rgba(0,0,0,0.3); }
+    .sbtn-and { background: white; color: var(--text-dark); box-shadow: 0 6px 0 rgba(0,0,0,0.12); }
+    .sbtn:hover { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,0.15); }
+    .sbtn-ico { font-size: 1.9rem; flex-shrink: 0; }
+    .sbtn-lbl { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.65; display: block; }
+    .sbtn-nm { font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 800; display: block; }
+
+    svg.wave { display: block; width: 100%; margin-bottom: -2px; }
+
+    /* FEATURES */
+    .feat-sec { background: var(--light-bg); padding: 5rem 2rem; }
+    .feat-inner { max-width: 1080px; margin: 0 auto; }
+    .eyebrow { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.4rem; text-align: center; }
+    .sec-title { font-family: 'Nunito', sans-serif; font-size: clamp(1.8rem,4vw,2.7rem); font-weight: 900; color: var(--text-dark); line-height: 1.1; text-align: center; margin-bottom: 0.7rem; }
+    .sec-title span { color: var(--orange); }
+    .sec-sub { font-size: 0.97rem; color: var(--text-mid); max-width: 520px; margin: 0 auto 3rem; line-height: 1.7; text-align: center; }
+
+    .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; }
+    .fc { background: white; border-radius: 20px; padding: 2rem 1.75rem; box-shadow: 0 4px 20px rgba(74,144,217,0.07); border-top: 4px solid transparent; transition: all 0.25s; }
+    .fc.or { border-color: var(--orange); }
+    .fc.bl { border-color: var(--blue); }
+    .fc.gr { border-color: var(--green); }
+    .fc.pu { border-color: var(--purple); }
+    .fc:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(74,144,217,0.14); }
+    .fc-ico { font-size: 2.4rem; margin-bottom: 0.9rem; display: block; }
+    .fc-title { font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.45rem; }
+    .fc-desc { font-size: 0.86rem; color: var(--text-mid); line-height: 1.7; }
+
+    /* TRADITIONS */
+    .trad-sec { background: white; padding: 5rem 2rem; text-align: center; }
+    .trad-grid { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
+    .tc { flex: 1; min-width: 195px; max-width: 260px; background: var(--off-white); border: 2px solid #eee; border-radius: 20px; padding: 2rem 1.5rem; transition: all 0.2s; }
+    .tc:hover { border-color: var(--yellow); box-shadow: 0 8px 24px rgba(247,201,72,0.2); transform: translateY(-4px); }
+    .tc-ico { font-size: 2.5rem; display: block; margin-bottom: 0.7rem; }
+    .tc-name { font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.4rem; }
+    .tc-desc { font-size: 0.82rem; color: var(--text-mid); line-height: 1.6; }
+    .tc-tag { display: inline-block; margin-top: 0.7rem; background: var(--yellow-light); color: var(--orange); font-size: 0.7rem; font-weight: 700; padding: 0.22rem 0.7rem; border-radius: 50px; letter-spacing: 0.05em; }
+
+    /* VERSE */
+    .verse-sec { background: linear-gradient(135deg, var(--purple) 0%, var(--blue-dark) 100%); padding: 5rem 2rem; text-align: center; }
+    .verse-text { font-family: 'Nunito', sans-serif; font-size: clamp(1.35rem,3vw,2.1rem); font-weight: 700; color: white; max-width: 660px; margin: 0 auto 1rem; line-height: 1.5; }
+    .verse-ref { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--yellow); }
+
+    /* COMING */
+    .coming-sec { background: var(--off-white); padding: 5rem 2rem; text-align: center; }
+    .coming-grid { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
+    .chip { background: white; border: 2px solid var(--yellow); border-radius: 14px; padding: 1rem 1.4rem; text-align: center; min-width: 130px; transition: all 0.2s; }
+    .chip:hover { background: var(--yellow-light); transform: translateY(-3px); }
+    .chip-ico { font-size: 1.7rem; display: block; margin-bottom: 0.35rem; }
+    .chip-name { font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800; color: var(--text-dark); }
+    .chip-tag { font-size: 0.62rem; font-weight: 700; color: var(--orange); letter-spacing: 0.07em; text-transform: uppercase; margin-top: 0.15rem; }
+
+    /* CTA */
+    .cta-sec { background: linear-gradient(160deg, var(--orange-bright) 0%, var(--orange) 100%); padding: 6rem 2rem; text-align: center; }
+    .free-pill { display: inline-block; background: var(--yellow); color: var(--orange); font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.85rem; padding: 0.3rem 1rem; border-radius: 50px; margin-bottom: 1.25rem; letter-spacing: 0.05em; }
+    .cta-title { font-family: 'Nunito', sans-serif; font-size: clamp(2rem,5vw,3.4rem); font-weight: 900; color: white; line-height: 1.1; margin-bottom: 0.7rem; }
+    .cta-sub { color: rgba(255,255,255,0.85); font-size: 1rem; font-weight: 600; margin-bottom: 2.25rem; }
+
+    footer { background: var(--text-dark); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .ft-logo { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.95rem; color: var(--yellow); }
+    footer p { font-size: 0.76rem; color: rgba(255,255,255,0.35); }
+    footer a { color: rgba(255,255,255,0.3); font-size: 0.72rem; text-decoration: none; }
+    footer a:hover { color: var(--yellow); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes popIn  { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+
+    @media(max-width:640px){
+      nav{padding:.9rem 1.25rem;}
+      .store-btns{flex-direction:column;align-items:center;}
+      .sbtn{width:230px;}
+      footer{flex-direction:column;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">📖 Daily <span class="bl">Bible</span> Puzzles</a>
+  <a href="#download" class="nav-cta">Download Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="sparkles">
+    <span class="sp" style="top:18%;left:8%;animation-delay:0s">✦</span>
+    <span class="sp" style="top:12%;left:82%;animation-delay:.7s">✦</span>
+    <span class="sp" style="top:35%;left:92%;animation-delay:1.2s">✦</span>
+    <span class="sp" style="top:70%;left:5%;animation-delay:.4s">✦</span>
+    <span class="sp" style="top:78%;left:88%;animation-delay:1.8s">✦</span>
+    <span class="sp" style="top:55%;left:15%;animation-delay:2.1s;font-size:.8rem">✦</span>
+    <span class="sp" style="top:25%;left:50%;animation-delay:2.5s;font-size:.7rem">✦</span>
+  </div>
+  <div class="hero-icon">📖</div>
+  <div class="hero-logo">
+    <span class="l1">DAILY</span>
+    <span class="l2">BIBLE</span>
+    <span class="l3">STUDY & PUZZLES</span>
+  </div>
+  <p class="hero-tag">Your daily dose of faith — one puzzle at a time. Deepen your scripture knowledge through fun, relaxing crossword puzzles.</p>
+  <div class="badges">
+    <span class="badge">✦ Free to Play</span>
+    <span class="badge">📱 iOS & Android</span>
+    <span class="badge">🌍 Multiple Traditions</span>
+    <span class="badge">🧩 Daily Puzzles</span>
+  </div>
+  <div class="store-btns" id="download">
+    <a href="#" class="sbtn sbtn-ios">
+      <span class="sbtn-ico">🍎</span>
+      <span><span class="sbtn-lbl">Download on the</span><span class="sbtn-nm">App Store</span></span>
+    </a>
+    <a href="#" class="sbtn sbtn-and">
+      <span class="sbtn-ico">▶</span>
+      <span><span class="sbtn-lbl">Get it on</span><span class="sbtn-nm">Google Play</span></span>
+    </a>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="background:var(--orange);display:block;">
+  <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="var(--light-bg)"/>
+</svg>
+
+<!-- FEATURES -->
+<section class="feat-sec">
+  <div class="feat-inner">
+    <p class="eyebrow">Why you'll love it</p>
+    <h2 class="sec-title">Faith meets <span>fun</span></h2>
+    <p class="sec-sub">Whether you're new to the Bible or a lifelong believer, our puzzles bring scripture to life — one clue at a time.</p>
+    <div class="feat-grid">
+      <div class="fc or">
+        <span class="fc-ico">🧩</span>
+        <h3 class="fc-title">Daily Crossword Puzzles</h3>
+        <p class="fc-desc">Fresh biblical crossword content every day. Learn stories, people, and teachings as you solve.</p>
+      </div>
+      <div class="fc bl">
+        <span class="fc-ico">⭐</span>
+        <h3 class="fc-title">Wisdom Points</h3>
+        <p class="fc-desc">Earn wisdom points as you complete puzzles. Track your streak and watch your knowledge grow.</p>
+      </div>
+      <div class="fc gr">
+        <span class="fc-ico">🕊️</span>
+        <h3 class="fc-title">No Pressure, No Timer</h3>
+        <p class="fc-desc">Play at your own pace. Relaxed, judgment-free — your personal time with scripture.</p>
+      </div>
+      <div class="fc pu">
+        <span class="fc-ico">🌍</span>
+        <h3 class="fc-title">Multiple Traditions</h3>
+        <p class="fc-desc">Personalized puzzles for your faith tradition. Open to all who seek wisdom and reflection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADITIONS -->
+<section class="trad-sec">
+  <p class="eyebrow">Open to All</p>
+  <h2 class="sec-title">Your tradition, <span style="color:var(--blue-dark)">your puzzles</span></h2>
+  <p class="sec-sub">We'll personalize your experience with scriptures and puzzles from your own tradition.</p>
+  <div class="trad-grid">
+    <div class="tc">
+      <span class="tc-ico">✝️</span>
+      <div class="tc-name">Christianity</div>
+      <p class="tc-desc">Bible-based puzzles centered on Jesus, the Church, and Christian teachings.</p>
+      <span class="tc-tag">2 Editions Available</span>
+    </div>
+    <div class="tc">
+      <span class="tc-ico">✡️</span>
+      <div class="tc-name">Judaism</div>
+      <p class="tc-desc">Puzzles rooted in the Tanakh, Jewish law, and rabbinic wisdom.</p>
+      <span class="tc-tag">2 Editions Available</span>
+    </div>
+  </div>
+</section>
+
+<!-- VERSE -->
+<section class="verse-sec">
+  <p class="verse-text">"Thy word is a lamp unto my feet, and a light unto my path."</p>
+  <p class="verse-ref">— Psalm 119:105</p>
+</section>
+
+<!-- COMING SOON -->
+<section class="coming-sec">
+  <p class="eyebrow">What's Next</p>
+  <h2 class="sec-title">More <span style="color:var(--orange)">game modes</span> on the way</h2>
+  <p class="sec-sub">We're just getting started. More ways to engage with scripture are coming soon.</p>
+  <div class="coming-grid">
+    <div class="chip"><span class="chip-ico">🧩</span><div class="chip-name">Crossword</div><div class="chip-tag">✓ Live Now</div></div>
+    <div class="chip"><span class="chip-ico">❓</span><div class="chip-name">Bible Quiz</div><div class="chip-tag">Coming Soon</div></div>
+    <div class="chip"><span class="chip-ico">🔤</span><div class="chip-name">Bible Wordle</div><div class="chip-tag">Coming Soon</div></div>
+    <div class="chip"><span class="chip-ico">🔗</span><div class="chip-name">Connections</div><div class="chip-tag">Coming Soon</div></div>
+    <div class="chip"><span class="chip-ico">🛤️</span><div class="chip-name">Path of Wisdom</div><div class="chip-tag">Coming Soon</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="free-pill">🎉 100% FREE TO DOWNLOAD</div>
+  <h2 class="cta-title">Make faith part of<br/>your daily rhythm</h2>
+  <p class="cta-sub">No subscription. No paywall. Just you, scripture, and a great puzzle.</p>
+  <div class="store-btns">
+    <a href="#" class="sbtn sbtn-ios">
+      <span class="sbtn-ico">🍎</span>
+      <span><span class="sbtn-lbl">Download on the</span><span class="sbtn-nm">App Store</span></span>
+    </a>
+    <a href="#" class="sbtn sbtn-and">
+      <span class="sbtn-ico">▶</span>
+      <span><span class="sbtn-lbl">Get it on</span><span class="sbtn-nm">Google Play</span></span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-logo">Daily Bible Puzzles</span>
+  <p>© 2026 Daily Bible Study & Puzzles. All rights reserved.</p>
+  <a href="/ads.txt">ads.txt</a>
+</footer>
+
+</body>
+</html>
